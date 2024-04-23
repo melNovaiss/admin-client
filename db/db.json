@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "99",
+      "username": "mel",
+      "password": "1234",
+      "role": "SUPPORT"
+    },
+    {
+      "id": "1c11",
+      "username": "cli",
+      "password": "$2a$12$GsufBh/HVvCC26qJUGAuWe93QiIRZpkT1epfeSbsI/pO3owVa0u1C",
+      "role": "ADMIN"
+    },
+    {
+      "id": "bc62",
+      "username": "vitoria",
+      "password": "$2a$12$QQjpFR5hDdr0c2ZhZbbszudLgP75kyCY6ybndmj3RSP.jA9bckS6q",
+      "role": "SUPPORT"
+    }
+  ]
+}

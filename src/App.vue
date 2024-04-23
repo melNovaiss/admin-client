@@ -1,30 +1,46 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
   <router-view/>
 </template>
 
 <style>
+.nav-link:hover {
+  color: #d9d7d7d2 !important;
+}
+.dropdown-item:hover {
+  color: #5f4a8c !important;
+}
+.dropdown-item:focus{
+  color: #5f4a8c !important;
+}
+.bg-body-purple {
+  background-color: #5f4a8c;
+}
+.bi-person-circle {
+  font-size: 1.5em;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+}
+.btn-purple1 {
+  background-color: #5f4a8c;
+  color: white;
+}
+.btn-purple1:hover {
+  background-color: #795eb4;
+  color: white;
+}
+a {
+  text-decoration: none;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.card {
+  border: 0;
 }
 </style>
