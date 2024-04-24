@@ -56,32 +56,51 @@ export default {
         return;
       }
 
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/users?username=${this.user}`
-        );
-        const users = response.data;
+      const data = {
+        username: this.user,
+        password: this.password,
+      };
 
-        if (users.length > 0) {
-          const userData = users[0];
-          const passwordMatch = await bcrypt.compare(this.password, userData.password);
+      await axios
+        .get("http://localhost:3000/login")
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("expirateAt", res.data.expirateAt);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("tokenType", res.data.tokenType);
 
-          if (passwordMatch) {
-            localStorage.setItem("user", userData.username);
-            localStorage.setItem("token", "ok");
-            this.$router.push("/");
-          } else {
-            console.log("User ou senha incorretos");
-            this.showLoginError();
-          }
-        } else {
-          console.log("Usuário não encontrado");
-          this.showLoginError();
-        }
-      } catch (error) {
-        console.error(error);
-        this.showLoginError();
-      }
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+
+      // try {
+      //   const response = await axios.get(
+      //     `http://3.83.118.45:8080/login`
+      //   );
+      //   const users = response.data;
+
+      //   if (users.length > 0) {
+      //     const userData = users[0];
+      //     const passwordMatch = await bcrypt.compare(this.password, userData.password);
+
+      //     if (passwordMatch) {
+      //       localStorage.setItem("user", userData.username);
+      //       localStorage.setItem("token", "ok");
+      //       this.$router.push("/");
+      //     } else {
+      //       console.log("User ou senha incorretos");
+      //       this.showLoginError();
+      //     }
+      //   } else {
+      //     console.log("Usuário não encontrado");
+      //     this.showLoginError();
+      //   }
+      // } catch (error) {
+      //   console.error(error);
+      //   this.showLoginError();
+      // }
     },
     showLoginError() {
       this.loginError = true;

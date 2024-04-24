@@ -19,7 +19,7 @@
         placeholder="User"
         required
       />
-      <label for="username">User</label>
+      <label for="username">Nome</label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -79,21 +79,22 @@ export default {
 
       const data = {
         username: this.username,
-        password: hashedPassword, // Salva o hash da senha
+        password: this.password, // Salva o hash da senha
         role: this.role,
       };
 
-      try {
-        await axios.post("http://localhost:3000/users", data);
-        this.username = "";
-        this.password = "";
-        this.role = "";
-        this.$router.push("/login"); // Redirecionamento para a rota /login
-        alert("Usuário criado com sucesso!");
-      } catch (error) {
-        console.error("Erro ao criar usuário:", error);
-        alert("Erro ao criar usuário. Por favor, tente novamente.");
-      }
+      await axios
+        .post("http://localhost:3000/register", data)
+        .then((res) => {
+          this.username = "";
+          this.password = "";
+          this.role = "";
+          this.$router.push("/login"); // Redirecionamento para a rota /login
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     },
   },
 };
