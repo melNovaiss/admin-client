@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
-  <router-view/>
+
+    <router-view />
 </template>
 
 <style>
@@ -13,7 +14,7 @@
 .dropdown-item:hover {
   color: #5f4a8c !important;
 }
-.dropdown-item:focus{
+.dropdown-item:focus {
   color: #5f4a8c !important;
 }
 .bg-body-purple {

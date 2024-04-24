@@ -1,14 +1,16 @@
 <template>
   <div class="container shadow my-5">
     <div class="row">
-      <div class="col-6 p-4 cardWelcome">
+      <!-- Coluna "Crie uma conta" visível apenas em telas maiores -->
+      <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
         <h2 class="text-white py-4">Crie uma conta</h2>
         <div class="text-white">
           <span>Lorem ipsum dolor sit amet. Et adipisci</span><br />
           <span>At officiis dignissimos et dolorem internos ut sapiente</span>
         </div>
       </div>
-      <div class="col-6" style="background-color: white">
+      <!-- Coluna "Registrar" ocupará a largura total em telas menores -->
+      <div class="col-12 col-md-6" style="background-color: white">
         <h1 class="pt-3">Registrar</h1>
         <registerForm />
       </div>

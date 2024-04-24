@@ -104,7 +104,7 @@ export default {
     },
     showLoginError() {
       this.loginError = true;
-      this.formSubmitted = false; // resetar formSubmitted para false
+      this.formSubmitted = false;
       this.user = "";
       this.password = "";
       setTimeout(() => {

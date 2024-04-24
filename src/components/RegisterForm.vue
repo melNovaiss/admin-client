@@ -74,12 +74,9 @@ export default {
         return;
       }
 
-      // Gera o hash da senha
-      const hashedPassword = await bcrypt.hash(this.password, 12);
-
       const data = {
         username: this.username,
-        password: this.password, // Salva o hash da senha
+        password: this.password,
         role: this.role,
       };
 
@@ -89,7 +86,7 @@ export default {
           this.username = "";
           this.password = "";
           this.role = "";
-          this.$router.push("/login"); // Redirecionamento para a rota /login
+          this.$router.push("/login");
           console.log(res);
         })
         .catch((err) => {
