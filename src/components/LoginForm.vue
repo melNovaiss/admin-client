@@ -36,7 +36,6 @@
 
 <script>
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 export default {
   name: "loginForm",
