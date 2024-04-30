@@ -1,18 +1,23 @@
 <template>
-  <div class="container shadow my-5">
-    <div class="row">
-      <!-- Coluna "Crie uma conta" visível apenas em telas maiores -->
-      <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
-        <h2 class="text-white py-4">Crie uma conta</h2>
-        <div class="text-white">
-          <span>Lorem ipsum dolor sit amet. Et adipisci</span><br />
-          <span>At officiis dignissimos et dolorem internos ut sapiente</span>
+  <div class="container">
+    <div class="container shadow my-5">
+      <div class="row">
+        <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
+          <h2 class="text-white py-4">Crie uma conta</h2>
+          <div class="text-white">
+            <span>Lorem ipsum dolor sit amet. Et adipisci</span><br />
+            <span>At officiis dignissimos et dolorem internos ut sapiente</span>
+          </div>
         </div>
-      </div>
-      <!-- Coluna "Registrar" ocupará a largura total em telas menores -->
-      <div class="col-12 col-md-6" style="background-color: white">
-        <h1 class="pt-3">Registrar</h1>
-        <registerForm />
+        <div class="col-12 col-md-6">
+          <div class="p-4" style="background-color: white">
+            <h1 class="pt-5 text-center">Registrar</h1>
+            <registerForm />
+            <div class="py-3 text-center">
+              <router-link to="/login"><a>Acesse sua conta</a></router-link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +51,12 @@ a:hover {
   text-decoration: none;
 }
 .form {
-  padding: 0 5em 0 5em;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form {
+    padding: 5rem 2rem 0 2rem;
+  }
 }
 </style>

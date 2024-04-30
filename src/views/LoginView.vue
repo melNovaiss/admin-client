@@ -1,20 +1,24 @@
 <template>
-  <div class="container shadow my-5">
-    <div class="row">
-      <div class="col-6 p-4 cardWelcome">
-        <h2 class="text-white py-4">Bem vindo de volta!</h2>
-        <div class="text-white">
-          <span>Lorem ipsum dolor sit amet. Et adipisci voluptate</span><br />
-          <span
-            >At officiis dignissimos et dolorem internos ut sapiente perspiciatis</span
-          >
+  <div class="container">
+    <div class="container shadow my-5">
+      <div class="row">
+        <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
+          <h2 class="text-white py-4">Bem vindo de volta!</h2>
+          <div class="text-white">
+            <span>Lorem ipsum dolor sit amet. Et adipisci voluptate</span><br />
+            <span
+              >At officiis dignissimos et dolorem internos ut sapiente perspiciatis</span
+            >
+          </div>
         </div>
-      </div>
-      <div class="col-6" style="background-color: white">
-        <h1 class="pt-5 text-center">Login</h1>
-        <loginForm />
-        <div class="py-3">
-          <router-link to="/register"><a>Criar conta</a></router-link>
+        <div class="col-12 col-md-6">
+          <div class="p-4" style="background-color: white">
+            <h1 class="pt-5 text-center">Login</h1>
+            <loginForm />
+            <div class="py-3 text-center">
+              <router-link to="/register"><a>Criar conta</a></router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -44,12 +48,19 @@ a {
   color: #5f4a8c;
   text-decoration: none;
 }
+
 a:hover {
   color: #5f4a8c;
   text-decoration: none;
 }
 
 .form {
-  padding: 5rem 10rem 0 10rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form {
+    padding: 5rem 2rem 0 2rem;
+  }
 }
 </style>
