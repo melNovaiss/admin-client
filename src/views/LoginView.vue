@@ -4,19 +4,15 @@
       <div class="row">
         <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
           <h2 class="text-white py-4">Bem vindo de volta!</h2>
-          <div class="text-white">
-            <span>Lorem ipsum dolor sit amet. Et adipisci voluptate</span><br />
-            <span
-              >At officiis dignissimos et dolorem internos ut sapiente perspiciatis</span
-            >
-          </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="p-4" style="background-color: white">
             <h1 class="pt-5 text-center">Login</h1>
             <loginForm />
             <div class="py-3 text-center">
-              <router-link to="/register"><a>Criar conta</a></router-link>
+              <router-link to="/register"
+                ><a>Não é registrado? Crie uma conta</a></router-link
+              >
             </div>
           </div>
         </div>
