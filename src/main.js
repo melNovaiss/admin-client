@@ -1,12 +1,33 @@
 import "bootstrap/dist/css/bootstrap.css";
-import bcrypt from 'bcryptjs';
-
-import { createApp } from "vue";
-// import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-
-createApp(App).use(router).mount("#app");
-
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.js";
+import bcrypt from "bcryptjs";
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import axios from "axios";
+
+// Configuração global do Axios
+axios.defaults.headers.common["Authorization"] =
+  localStorage.getItem("BigToken");
+
+axios.interceptors.response.use(
+  (response) => {
+    console.log("a");
+    return response;
+  },
+  (error) => {
+    if (error.response) {
+      console.log("b");
+      if (error.response.status === 403) {
+        console.log("c");
+        alert("Acesso negado. \nPor segurança, faça login novamente.");
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Criação do aplicativo Vue
+createApp(App).use(router).mount("#app");

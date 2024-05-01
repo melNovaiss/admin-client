@@ -28,6 +28,13 @@ const routes = [
       return import("../views/RegisterView.vue");
     },
   },
+  {
+    path: "/client",
+    name: "client",
+    component: function () {
+      return import("../views/ClientView.vue");
+    },
+  },
 ];
 
 const router = createRouter({
