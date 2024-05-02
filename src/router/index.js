@@ -34,6 +34,9 @@ const routes = [
     component: function () {
       return import("../views/ClientView.vue");
     },
+    meta: {
+      auth: true,
+    },
   },
 ];
 

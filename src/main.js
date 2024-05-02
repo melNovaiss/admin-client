@@ -9,7 +9,7 @@ import axios from "axios";
 
 // Configuração global do Axios
 axios.defaults.headers.common["Authorization"] =
-  localStorage.getItem("BigToken");
+  localStorage.getItem("token");
 
 axios.interceptors.response.use(
   (response) => {
@@ -29,5 +29,4 @@ axios.interceptors.response.use(
   }
 );
 
-// Criação do aplicativo Vue
 createApp(App).use(router).mount("#app");
