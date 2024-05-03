@@ -30,7 +30,9 @@
     <div class="pt-4 text-danger" v-show="loginError">
       <i class="bi bi-x-circle"></i> User ou senha incorretos.
     </div>
-    <button type="submit" class="btn btn-purple1 mt-4 rounded-pill px-4">Entrar</button>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-purple1 mt-4 rounded-pill px-4">Entrar</button>
+    </div>
   </form>
 </template>
 
@@ -113,3 +115,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>

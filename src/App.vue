@@ -1,6 +1,23 @@
 <template>
+  <nav
+    v-if="$route && $route.name !== 'login' && $route.name !== 'register'"
+    class="navbar navbar-expand-lg navbar-dark bg-body-purple shadow py-2"
+  >
+    <Navbar />
+  </nav>
   <router-view />
 </template>
+
+<script>
+import Navbar from "./components/Navbar.vue";
+
+export default {
+  name: "ClientView",
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style>
 /* .nav-link:hover {
@@ -27,7 +44,7 @@
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .btn-purple1 {
@@ -40,11 +57,11 @@
   color: white;
 }
 
-a {
+/* a {
   text-decoration: none;
-}
+} */
 
-.card {
+/* .card {
   border: 0;
-}
+} */
 </style>

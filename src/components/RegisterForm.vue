@@ -47,8 +47,9 @@
         <option value="BOT">BOT</option>
       </select>
     </div>
-
-    <button type="submit" class="btn btn-purple1 rounded-pill px-4 mb-3">Salvar</button>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-purple1 rounded-pill px-4 mb-3">Salvar</button>
+    </div>
   </form>
 </template>
 

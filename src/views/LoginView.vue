@@ -3,7 +3,7 @@
     <div class="container shadow my-5">
       <div class="row">
         <div class="col-md-6 p-4 cardWelcome d-none d-md-block">
-          <h2 class="text-white py-4">Bem vindo de volta!</h2>
+          <h2 class="text-white py-4 text-center">Bem vindo de volta!</h2>
         </div>
         <div class="col-12 col-md-6">
           <div class="p-4" style="background-color: white">
