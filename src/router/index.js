@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import aaa from "../assets/js/cors"
 
 const routes = [
   {
@@ -26,9 +27,6 @@ const routes = [
     name: "client",
     component: function () {
       return import("../views/ClientView.vue");
-    },
-    meta: {
-      auth: true,
     },
   },
 ];
