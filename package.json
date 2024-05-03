@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "backend": "json-server --watch db/db.json"
+    "backend": "json-server --watch db/db.json",
+    "start:json-server": "json-server --watch db.json --middlewares-dir ./src/assets/js"
   },
   "dependencies": {
     "axios": "^1.6.8",
