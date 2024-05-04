@@ -47,6 +47,10 @@ export default {
   /* text-align: center; */
 }
 
+input {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
 .btn-purple1 {
   background-color: #5f4a8c;
   color: white;
@@ -54,6 +58,16 @@ export default {
 
 .btn-purple1:hover {
   background-color: #795eb4;
+  color: white;
+}
+
+.btn-purple2 {
+  background-color: #4e3d73;
+  color: white;
+}
+
+.btn-purple2:hover {
+  background-color: #5f4a8c;
   color: white;
 }
 
