@@ -11,6 +11,7 @@
               :selectedClient="selectedClient"
               @clienteCriado="handleClienteCriado"
               @clienteDeletado="handleClienteDeletado"
+              @client-selected="handleClientSelectedForm"
             />
           </div>
         </div>
@@ -47,6 +48,13 @@ export default {
       console.log(client);
       // Atualize a variável selectedClient com os dados do cliente selecionado
       this.selectedClient = client;
+    },
+    handleClientSelectedForm(client) {
+      // Este manipulador de eventos é para limpar a seleção do cliente no formulário
+      // Quando o evento 'client-selected' é emitido pelo componente CliForm
+      if (!client) {
+        this.selectedClient = null;
+      }
     },
   },
 };

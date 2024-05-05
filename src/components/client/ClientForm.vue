@@ -1,5 +1,11 @@
 <template>
-  <form class="form" method="POST" @submit.prevent="createCli" novalidate>
+  <form
+    class="form"
+    method="POST"
+    @submit.prevent="createCli"
+    :class="{ 'was-validated': formSubmitted && areRequiredFieldsEmpty() }"
+    novalidate
+  >
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
@@ -69,6 +75,7 @@
                       ? 'bi bi-person-fill'
                       : 'bi bi-building-fill'
                   "
+                  required="required"
                 ></i>
               </span>
               <input
@@ -294,6 +301,7 @@ export default {
           this.contactName = newVal.contactName || "";
           this.stateRegistration = newVal.stateRegistration || "";
           this.address = newVal.address || {
+            zipCode: "",
             street: "",
             neighborhood: "",
             city: "",
@@ -328,11 +336,44 @@ export default {
     },
   },
   methods: {
+    areRequiredFieldsEmpty() {
+      if (
+        !this.cpfCnpj ||
+        !this.companyName ||
+        !this.tradeName ||
+        !this.contactName ||
+        !this.stateRegistration ||
+        !this.dueDate ||
+        !this.points ||
+        !this.currentLicensePrice ||
+        !this.clientType ||
+        !this.taxRegime ||
+        !this.bigVersion ||
+        !this.contact ||
+        !this.contact.whatsapp ||
+        !this.contact.email ||
+        !this.address ||
+        !this.address.zipCode ||
+        !this.address.street ||
+        !this.address.neighborhood ||
+        !this.address.city ||
+        !this.address.number
+      ) {
+        return true;
+      }
+      return false;
+    },
+
     formatarCpfCnpj() {
       this.cpfCnpj = formatarCpfCnpj(this.cpfCnpj);
     },
+
     async createCli() {
       this.formSubmitted = true;
+
+      if (this.areRequiredFieldsEmpty()) {
+        return;
+      }
 
       const data = {
         cpfCnpj: this.cpfCnpj,
@@ -358,22 +399,23 @@ export default {
         released: this.released,
       };
 
+      console.log("entrou");
       try {
         let res;
         if (this.selectedClient) {
-          // Se um cliente já estiver selecionado, envie uma solicitação PUT para atualizar os dados
           res = await axios.put(
             `http://localhost:3000/companies/${this.selectedClient.id}`,
             data
           );
         } else {
-          // Caso contrário, envie uma solicitação POST para criar um novo cliente
           res = await axios.post("http://localhost:3000/companies", data);
+          console.log("data");
         }
 
         this.$emit("clienteCriado");
         this.resetForm();
         this.$router.push("/client");
+        this.$emit("client-selected", null);
         console.log(res);
       } catch (error) {
         console.log(error.response);
@@ -394,7 +436,6 @@ export default {
     },
 
     resetForm() {
-      // Reinicializa todos os campos do formulário
       this.id = "";
       this.cpfCnpj = "";
       this.companyName = "";
@@ -402,6 +443,7 @@ export default {
       this.contactName = "";
       this.stateRegistration = "";
       this.address = {
+        zipCode: "",
         street: "",
         number: "",
         neighborhood: "",

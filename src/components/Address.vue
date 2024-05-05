@@ -3,13 +3,26 @@
     <div class="col-md-2">
       <div class="mb-3">
         <label class="form-label">CEP *</label>
-        <input type="text" @input="searchAddress" class="form-control" id="zipCode" v-model="zipCode" />
+        <input
+          type="text"
+          @input="searchAddress"
+          class="form-control"
+          id="zipCode"
+          required="required"
+          v-model="address.zipCode"
+        />
       </div>
     </div>
     <div class="col-md-4">
       <div class="mb-3">
         <label class="form-label">Endereço *</label>
-        <input type="text" class="form-control" id="street" v-model="address.street" />
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          required="required"
+          v-model="address.street"
+        />
       </div>
     </div>
     <div class="col-md-3">
@@ -19,6 +32,7 @@
           type="text"
           class="form-control"
           id="neighborhood"
+          required="required"
           v-model="address.neighborhood"
         />
       </div>
@@ -26,7 +40,13 @@
     <div class="col-md-2">
       <div class="mb-3">
         <label class="form-label">Cidade *</label>
-        <input type="text" class="form-control" id="city" v-model="address.city" />
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          required="required"
+          v-model="address.city"
+        />
       </div>
     </div>
     <div class="col-md-1">
@@ -36,6 +56,7 @@
           type="text"
           class="form-control"
           id="number"
+          required="required"
           v-model="address.number"
           ref="numInput"
         />
@@ -60,7 +81,9 @@ export default {
         try {
           const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
           const addressData = response.data;
+          console.log(addressData);
 
+          this.address.zipCode = addressData.cep || "";
           this.address.street = addressData.logradouro || "";
           this.address.neighborhood = addressData.bairro || "";
           this.address.city = addressData.localidade || "";
