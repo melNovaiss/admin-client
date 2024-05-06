@@ -52,20 +52,20 @@
     </ul>
     <div class="tab-content" id="pills-tabContent">
       <div
-        class="tab-pane fade show active"
+        class="tab-pane fade show active pb-2"
         id="pills-detalhes"
         role="tabpanel"
         aria-labelledby="pills-detalhes-tab"
         tabindex="0"
       >
         <div class="row">
-          <div class="col-md-1">
+          <div class="col-md-2">
             <div class="mb-3">
               <label class="form-label">Código</label>
               <input type="text" class="form-control" id="id" v-model="id" disabled />
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label class="form-label">CPF/CNPJ *</label>
             <div class="input-group mb-3">
               <span class="input-group-text shadow-sm">
@@ -89,7 +89,7 @@
               />
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="mb-3">
               <label class="form-label">Razão Social *</label>
               <input
@@ -101,7 +101,9 @@
               />
             </div>
           </div>
-          <div class="col-md-4">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
             <div class="mb-3">
               <label class="form-label">Nome Fantasia *</label>
               <input
@@ -113,9 +115,7 @@
               />
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="mb-3">
               <label class="form-label">Nome do Responsavel *</label>
               <input
@@ -127,7 +127,9 @@
               />
             </div>
           </div>
-          <div class="col-md-2">
+        </div>
+        <div class="row">
+          <div class="col-md-3">
             <div class="mb-3">
               <label class="form-label">IE *</label>
               <input
@@ -142,7 +144,7 @@
           </div>
           <div class="col-md-2">
             <div class="mb-3">
-              <label class="form-label">Dia de vencimento *</label>
+              <label class="form-label">Dia de venc. *</label>
               <input
                 type="number"
                 class="form-control"
@@ -152,7 +154,7 @@
               />
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <div class="mb-3">
               <label class="form-label">Pontos *</label>
               <input
@@ -164,7 +166,7 @@
               />
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="mb-3">
               <label class="form-label">Preço da Licença atual *</label>
               <input
@@ -179,7 +181,7 @@
         </div>
         <div class="row">
           <div class="col-md-3">
-            <label>Tipo de Cliente</label>
+            <label class="form-label">Tipo de Cliente</label>
             <select class="form-select" v-model="clientType" required>
               <option selected value="VAREJO">Varejo</option>
               <option value="ATACADO">Atacado</option>
@@ -189,7 +191,7 @@
             </select>
           </div>
           <div class="col-md-3">
-            <label>Taxa de Regime</label>
+            <label class="form-label">Taxa de Regime</label>
             <select class="form-select" v-model="taxRegime" required>
               <option selected value="LUCRO_REAL">Lucro Real</option>
               <option value="LUCRO_PRESUMIDO">Lucro Presumido</option>
@@ -197,7 +199,7 @@
             </select>
           </div>
           <div class="col-md-3">
-            <label>BIG Versão</label>
+            <label class="form-label">BIG Versão</label>
             <select class="form-select" v-model="bigVersion" required>
               <option selected value="V2">V2</option>
               <option value="V4">V4</option>
@@ -404,7 +406,6 @@ export default {
         released: this.released,
       };
 
-      console.log("entrou");
       try {
         let res;
         if (this.selectedClient) {
@@ -421,6 +422,9 @@ export default {
         this.resetForm();
         // this.$router.push("/client");
         this.$emit("client-selected", null);
+
+        const detalhesTabButton = document.getElementById("pills-detalhes-tab");
+        detalhesTabButton.click();
         console.log(res);
       } catch (error) {
         console.log(error.response);

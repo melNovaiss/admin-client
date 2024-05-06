@@ -1,7 +1,13 @@
 <template>
-  <form class="form" method="POST" @submit.prevent="createBillings" novalidate>
+  <form
+    class="form"
+    method="POST"
+    @submit.prevent="createBillings"
+    :class="{ 'was-validated': formSubmitted && areRequiredFieldsEmpty() }"
+    novalidate
+  >
     <div class="row">
-      <div class="col-md-1">
+      <div class="col-md-2">
         <div class="mb-3">
           <label class="form-label">Código</label>
           <input
@@ -13,7 +19,7 @@
           />
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="mb-3">
           <label class="form-label">Razão Social <i class="bi bi-search px-2"></i></label>
           <input
@@ -26,17 +32,17 @@
       </div>
       <div class="col-md-2">
         <div class="mb-3">
-          <label class="form-label">Mês de Referência *</label>
+          <label class="form-label">Mês de Refer. *</label>
           <input
             type="number"
             class="form-control"
             id="referenceMonth"
             v-model="referenceMonth"
-            required="required"
+            required
           />
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
         <div class="mb-3">
           <label class="form-label">R$ Valor *</label>
           <input
@@ -44,11 +50,13 @@
             class="form-control"
             id="amount"
             v-model="amount"
-            required="required"
+            required
           />
         </div>
       </div>
-      <div class="col-md-2">
+    </div>
+    <div class="row">
+      <div class="col-md-3">
         <div class="mb-3">
           <label class="form-label">Data de Vencimento *</label>
           <input
@@ -56,12 +64,12 @@
             class="form-control"
             id="dueDate"
             v-model="dueDate"
-            required="required"
+            required
           />
         </div>
       </div>
-      <div class="col-md-2">
-        <label class="form-label">Estado do Pagamento</label>
+      <div class="col-md-3">
+        <label class="form-label">Estado do Pagamento *</label>
         <select class="form-select" v-model="stateBilling" required>
           <option selected value="OPENED">Aberto</option>
           <option value="PAID">Pago</option>
@@ -114,6 +122,10 @@ export default {
           // Atualiza os dados do formulário com os dados do cobrança selecionado
           this.company = newVal.id || "";
           this.companyName = newVal.companyName || "";
+          this.referenceMonth = newVal.referenceMonth || "";
+          this.amount = newVal.amount || "";
+          this.dueDate = newVal.dueDate || "";
+          this.stateBilling = newVal.stateBilling || "";
         } else {
           this.resetForm();
         }
@@ -122,6 +134,20 @@ export default {
     },
   },
   methods: {
+    areRequiredFieldsEmpty() {
+      if (
+        !this.company ||
+        !this.companyName ||
+        !this.referenceMonth ||
+        !this.amount ||
+        !this.dueDate ||
+        !this.stateBilling
+      ) {
+        return true;
+      }
+      return false;
+    },
+
     async createBillings() {
       this.formSubmitted = true;
 
@@ -136,7 +162,15 @@ export default {
 
       try {
         let res;
-        res = await axios.post("http://localhost:3000/billings", data);
+        if (this.selectedBilling) {
+          res = await axios.put(
+            `http://localhost:3000/billings/${this.selectedBilling.id}`,
+            data
+          );
+        } else {
+          res = await axios.post("http://localhost:3000/billings", data);
+          console.log("data");
+        }
 
         this.$emit("billingCriado");
         this.resetForm();
@@ -151,7 +185,9 @@ export default {
     async deleteBilling() {
       try {
         if (this.selectedBilling) {
-          await axios.delete(`http://localhost:3000/companies/${this.selectedBilling.id}`);
+          await axios.delete(
+            `http://localhost:3000/companies/${this.selectedBilling.id}`
+          );
           this.$emit("billingDeletado");
           this.resetForm();
           this.$emit("billing-selected", null);

@@ -52,15 +52,15 @@
                 <div class="col-5 text-muted fs-7">
                   {{ c.cpfCnpj }}
                 </div>
-                <div class="col-6 text-muted fs-7">
+                <div class="col-7 text-muted fs-7">
                   {{ c.tradeName }}
                 </div>
               </div>
               <div class="row">
-                <div class="col-3 text-black-50 fs-8">
+                <div class="col-6 text-black-50 fs-8">
                   Tipo: {{ c.clientType }}
                 </div>
-                <div class="col-2 text-black-50 fs-8">
+                <div class="col-6 text-black-50 fs-8">
                  Versão:  {{ c.bigVersion }}
                 </div>
                 <!-- <div class="col-2 text-black-50 fs-8">

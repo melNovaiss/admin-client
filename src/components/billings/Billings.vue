@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-2 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
+                <div class="col-3 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
                 <div class="col-4 text-muted fs-7">R$ {{ b.amount }}</div>
                 <div class="col-4 text-muted fs-7">
                   {{ b.dueDate }}

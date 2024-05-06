@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <router-link class="nav-link pe-4" to="/"><h3 class="m-0">Admin Clientes</h3></router-link>
+    <router-link class="nav-link pe-4" to="/"
+      ><h3 class="m-0">Admin Clientes</h3></router-link
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -60,6 +62,11 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    removeUser() {
+      localStorage.clear();
+    },
+  },
 };
 </script>
 
