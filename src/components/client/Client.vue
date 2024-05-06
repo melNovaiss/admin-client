@@ -1,4 +1,20 @@
 <template>
+  <form class="shadow-sm mb-3 mx-5" role="search">
+    <div class="input-group">
+      <input
+        v-model="termoBusca"
+        type="text"
+        class="form-control"
+        placeholder="Código ou Nome"
+      />
+      <button class="btn btn-outline-primary" type="submit">
+        <i class="bi bi-search"></i>
+      </button>
+      <!-- <button class="btn btn-outline-success" type="button" @click="resetForm()">
+        Incluir
+      </button> -->
+    </div>
+  </form>
   <div class="row">
     <div class="col-md-7">
       <p class="text-body-tertiary pt-1 mb-0">
@@ -18,7 +34,6 @@
       <thead>
         <tr>
           <th>Cliente</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -43,10 +58,10 @@
               </div>
               <div class="row">
                 <div class="col-3 text-black-50 fs-8">
-                  {{ c.clientType }}
+                  Tipo: {{ c.clientType }}
                 </div>
                 <div class="col-2 text-black-50 fs-8">
-                  {{ c.bigVersion }}
+                 Versão:  {{ c.bigVersion }}
                 </div>
                 <!-- <div class="col-2 text-black-50 fs-8">
                   {{ c.active }}
@@ -57,21 +72,12 @@
               </div>
             </div>
           </td>
-          <td>
-            <div class="d-flex justify-content-end">
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-sm btn-info text-white">
-                  <i class="bi bi-key-fill"></i>
-                </button>
-              </div>
-            </div>
-          </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="text-center" v-else>
-    <span><i class="bi bi-x-circle text-danger"></i> Não há clientes cadastrados.</span>
+    <span><i class="bi bi-x-circle text-danger"></i> Não há itens cadastrados.</span>
   </div>
 </template>
 

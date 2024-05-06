@@ -18,7 +18,7 @@
           <router-link class="nav-link menuItem" to="/client">Clientes</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link menuItem" aria-current="page" href="/cobra"
+          <router-link class="nav-link menuItem" aria-current="page" to="/billings"
             >Cobranças</router-link
           >
         </li>

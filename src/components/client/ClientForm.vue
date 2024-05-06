@@ -131,7 +131,8 @@
             <div class="mb-3">
               <label class="form-label">IE *</label>
               <input
-                type="text"
+                type="number"
+                maxlength="9"
                 class="form-control"
                 id="stateRegistration"
                 v-model="stateRegistration"
@@ -143,7 +144,7 @@
             <div class="mb-3">
               <label class="form-label">Dia de vencimento *</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="dueDate"
                 v-model="dueDate"
@@ -155,7 +156,7 @@
             <div class="mb-3">
               <label class="form-label">Pontos *</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="points"
                 v-model="points"
@@ -167,7 +168,7 @@
             <div class="mb-3">
               <label class="form-label">Preço da Licença atual *</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="stateRegistration"
                 v-model="currentLicensePrice"
@@ -235,7 +236,12 @@
       >
         Excluir
       </button>
-      <button type="submit" class="btn btn-purple2">Salvar</button>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary" @click="resetForm">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-purple2">Salvar</button>
+      </div>
     </div>
   </form>
 </template>
@@ -253,11 +259,11 @@ export default {
     Contact,
   },
   props: {
-    selectedClient: Object, // Propriedade para receber os dados do cliente selecionado
+    selectedClient: Object,
   },
   data() {
     return {
-      isClientSelected: false, // Variável para controlar a visibilidade do botão de exclusão
+      // isClientSelected: false, // Variável para controlar a visibilidade do botão de exclusão
       cpfCnpj: "",
       companyName: "",
       tradeName: "",
@@ -328,7 +334,6 @@ export default {
           this.active = newVal.active !== undefined ? newVal.active : true;
           this.released = newVal.released !== undefined ? newVal.released : true;
         } else {
-          // Limpa os dados do formulário se nenhum cliente for selecionado
           this.resetForm();
         }
       },
@@ -414,7 +419,7 @@ export default {
 
         this.$emit("clienteCriado");
         this.resetForm();
-        this.$router.push("/client");
+        // this.$router.push("/client");
         this.$emit("client-selected", null);
         console.log(res);
       } catch (error) {
@@ -436,6 +441,7 @@ export default {
     },
 
     resetForm() {
+      this.$emit("client-selected", null);
       this.id = "";
       this.cpfCnpj = "";
       this.companyName = "";

@@ -7,9 +7,6 @@
       "role": "ADMIN"
     }
   ],
-  "companies": [
-   
-  ],
   "login": {
     "username": "rudney",
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJiaWctc2VjdXJpdHkiLCJ1cG4iOiJydWRuZXkiLCJncm91cHMiOlsiQURNSU4iXSwiaWR1c2VyIjoxLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTM4NDI4NTQsImV4cCI6MTcxMzg0NjQ1NCwianRpIjoiNWZjYzM4ZWItMDZlNy00ZDNkLTg0NzctMTE1YjJiMzNhMmUyIn0.bex7Vh2zLZSvV3FREsRoXk3s4YCboDG9R6KGqM4Yc5TQY-AUUqRCwcwIEgVA6o4EkfkATEHtEbYIGEWoTc6jqa1ctxJjlqlpqPYmNnMWQlY_qXVwnPWKXIgPZJc6eKRfzL4OS6_B2c8vMYD8gdlkOVEY5JOL7W8Q5tpIq-ego0nUBqz2284n9UWQAeyi2BK3Ddefe7B6e3NCsTVjXfpc2KHaRS6oK8RzNSmEEqPWMLaoidupFDqAx9nlZgUphT5MpUL2mBsNsZOVwrgCmRbOSJ47lQjlXAQa_W-o0qQIhfAgQTBILeirAIRu6HJLOwkiBILt7SPP3vX5lRKVEeofsQ",
@@ -17,5 +14,66 @@
     "expirateAt": "2024-04-23T01:27:35.1037604",
     "message": "Token gerado com sucesso!",
     "valid": true
-  }
+  },
+  "companies": [
+    {
+      "id": "f1ef",
+      "cpfCnpj": "11.111.111/1111-11",
+      "companyName": "teste teste teste",
+      "tradeName": "aaaa",
+      "contactName": "aaaaa",
+      "stateRegistration": 1,
+      "address": {
+        "zipCode": "61801-375",
+        "street": "Rua João Ferreira Pinto",
+        "number": "22",
+        "neighborhood": "Carnaubinha",
+        "city": "Pacatuba"
+      },
+      "contact": {
+        "phone": "(59) 8932-5064",
+        "whatsapp": "(22) 22222-2222",
+        "email": "mellnovais14@gmail.com"
+      },
+      "clientType": "ATACADO",
+      "taxRegime": "LUCRO_PRESUMIDO",
+      "bigVersion": "V4",
+      "dueDate": 10,
+      "points": 3,
+      "currentLicensePrice": 100,
+      "mfe": true,
+      "mgv": true,
+      "tag": true,
+      "pos": true,
+      "tef": true,
+      "pda": true,
+      "active": true,
+      "released": true
+    }
+  ],
+  "billings": [
+    {
+      "id": "9387",
+      "company": "f1ef",
+      "companyName": "teste teste teste",
+      "referenceMonth": 5,
+      "amount": 100,
+      "dueDate": "2024-05-05",
+      "stateBilling": "PAID"
+    }
+  ],
+  "payment": [
+    {
+      "id": "49ab",
+      "company": "9387",
+      "companyName": "teste teste teste",
+      "referenceMonth": 5,
+      "amount": 100,
+      "dueDate": "2024-05-05",
+      "stateBilling": "PAID",
+      "amountReceived": 100,
+      "payDate": "2024-05-05",
+      "formOfPayment": "PIX"
+    }
+  ]
 }
