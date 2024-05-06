@@ -6,24 +6,20 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
-// // Configuração global do Axios
-// axios.defaults.headers.common["Authorization"] =
-//   localStorage.getItem("token");
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-// // Interceptor de resposta para lidar com erros
-// axios.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     if (error.response && error.response.status === 403) {
-//       alert("Acesso negado. \nPor segurança, faça login novamente.");
-//       window.location.href = "/login";
-//     }
-//     return Promise.reject(error);
-//   }
-// );
-
-// export default axios;
+export default axios;
 
 createApp(App).use(router).mount("#app");
