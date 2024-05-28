@@ -17,64 +17,30 @@
   },
   "companies": [
     {
-      "cpfCnpj": "11.111.111/1111-11",
-      "companyName": "teste teste teste",
-      "tradeName": "aaaa",
-      "contactName": "aaaaa",
-      "stateRegistration": 123456789,
+      "id": "724e",
+      "cpfCnpj": "086.587.593-69",
+      "companyName": "mel anny novais",
+      "tradeName": "mel aaa",
+      "contactName": "mel anny novais",
+      "stateRegistration": 123456,
       "address": {
         "zipCode": "61801-375",
         "street": "Rua João Ferreira Pinto",
-        "number": "22",
-        "neighborhood": "Carnaubinha",
-        "city": "Pacatuba"
-      },
-      "contact": {
-        "phone": "(59) 8932-5064",
-        "whatsapp": "(22) 22222-2222",
-        "email": "mellnovais14@gmail.com"
-      },
-      "clientType": "ATACADO",
-      "taxRegime": "LUCRO_PRESUMIDO",
-      "bigVersion": "V5",
-      "dueDate": 10,
-      "points": 3,
-      "currentLicensePrice": 100,
-      "mfe": true,
-      "mgv": true,
-      "tag": true,
-      "pos": true,
-      "tef": true,
-      "pda": true,
-      "active": true,
-      "released": true,
-      "id": "f1ef"
-    },
-    {
-      "id": "0613",
-      "cpfCnpj": "11.111.111/1111-11",
-      "companyName": "a",
-      "tradeName": "a",
-      "contactName": "a",
-      "stateRegistration": 111111,
-      "address": {
-        "zipCode": "61801-375",
-        "street": "Rua João Ferreira Pinto",
-        "number": "1",
+        "number": "14",
         "neighborhood": "Carnaubinha",
         "city": "Pacatuba"
       },
       "contact": {
         "phone": "",
         "whatsapp": "(11) 11111-1111",
-        "email": "a@gmail.com"
+        "email": "mel@gmail.com"
       },
-      "clientType": "VAREJO",
-      "taxRegime": "LUCRO_REAL",
+      "clientType": "ATACADO",
+      "taxRegime": "SIMPLES_NACIONAL",
       "bigVersion": "V5",
-      "dueDate": 1,
-      "points": 1,
-      "currentLicensePrice": 1,
+      "dueDate": 15,
+      "points": 3,
+      "currentLicensePrice": 150,
       "mfe": true,
       "mgv": true,
       "tag": true,
@@ -85,47 +51,6 @@
       "released": true
     }
   ],
-  "billings": [
-    {
-      "company": "9387",
-      "companyName": "teste teste teste",
-      "referenceMonth": 5,
-      "amount": 100,
-      "dueDate": "2024-05-05",
-      "stateBilling": "EXPIRED",
-      "id": "9387"
-    },
-    {
-      "id": "1558",
-      "company": "",
-      "companyName": "",
-      "referenceMonth": "",
-      "amount": "",
-      "dueDate": "",
-      "stateBilling": ""
-    },
-    {
-      "id": "99b0",
-      "company": "",
-      "companyName": "",
-      "referenceMonth": "",
-      "amount": "",
-      "dueDate": "",
-      "stateBilling": ""
-    }
-  ],
-  "payment": [
-    {
-      "id": "49ab",
-      "company": "9387",
-      "companyName": "teste teste teste",
-      "referenceMonth": 5,
-      "amount": 100,
-      "dueDate": "2024-05-05",
-      "stateBilling": "PAID",
-      "amountReceived": 100,
-      "payDate": "2024-05-05",
-      "formOfPayment": "PIX"
-    }
-  ]
+  "billings": [],
+  "payment": []
 }

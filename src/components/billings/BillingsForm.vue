@@ -21,10 +21,11 @@
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label class="form-label">Razão Social <i class="bi bi-search px-2"></i></label>
+          <label class="form-label">Razão Social</label>
           <input
             type="text"
             class="form-control"
+            placeholder="Pesquisar..."
             id="companyName"
             v-model="companyName"
           />
