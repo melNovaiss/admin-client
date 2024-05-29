@@ -57,10 +57,10 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-6 text-black-50 fs-8">
+                <div class="col-5 text-black-50 fs-8">
                   Tipo: {{ c.clientType }}
                 </div>
-                <div class="col-6 text-black-50 fs-8">
+                <div class="col-4 text-black-50 fs-8">
                  Versão:  {{ c.bigVersion }}
                 </div>
                 <!-- <div class="col-2 text-black-50 fs-8">
