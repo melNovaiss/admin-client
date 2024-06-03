@@ -25,7 +25,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Pesquisar..."
+            placeholder="Digite para pesquisar"
             id="companyName"
             v-model="companyName"
             @input="onInput"
