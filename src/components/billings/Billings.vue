@@ -10,11 +10,9 @@
       <button class="btn btn-outline-primary" type="submit">
         <i class="bi bi-search"></i>
       </button>
-      <!-- <button class="btn btn-outline-success" type="button" @click="resetForm()">
-        Incluir
-      </button> -->
     </div>
   </form>
+
   <div class="row">
     <div class="col-md-7">
       <p class="text-body-tertiary pt-1 mb-0">
@@ -29,6 +27,48 @@
       />
     </div>
   </div>
+
+  <div class="row pb-2">
+    <div class="col-md-3">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary"
+        :class="{ active: activeFilter === null }"
+        @click="filterByState(null)"
+      >
+        Todos
+      </button>
+    </div>
+    <div class="col-md-9 d-flex justify-content-end">
+      <div class="btn-group" role="group">
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-primary"
+          :class="{ active: activeFilter === 'OPENED' }"
+          @click="filterByState('OPENED')"
+        >
+          Aberto
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-success"
+          :class="{ active: activeFilter === 'PAID' }"
+          @click="filterByState('PAID')"
+        >
+          Pago
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+          :class="{ active: activeFilter === 'EXPIRED' }"
+          @click="filterByState('EXPIRED')"
+        >
+          Expirado
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="shadow-sm tb_height" v-if="totalBillings > 0">
     <table class="table table-striped">
       <thead>
@@ -50,19 +90,20 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-3 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
-                <div class="col-4 text-muted fs-7">R$ {{ b.amount }}</div>
-                <div class="col-4 text-muted fs-7">
+                <div class="col-2 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
+                <div class="col-2 text-muted fs-7">R$ {{ b.amount }}</div>
+                <div class="col-3 text-muted fs-7">
                   {{ b.dueDate }}
                 </div>
-                <div class="col-2 text-muted fs-7">
-                  {{ b.stateBilling }}
-                </div>
+                <div class="col-4 text-muted fs-7">Status: {{ b.stateBilling }}</div>
+                <!-- <div class="col-2 text-muted fs-7">
+                  {{ paymentList.formOfPayment }}
+                </div> -->
               </div>
             </div>
           </td>
           <td>
-            <div class="d-flex justify-content-end">
+            <div v-if="b.stateBilling !== 'PAID'" class="d-flex justify-content-end">
               <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <button
                   type="button"
@@ -99,6 +140,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-center" v-else>
     <span><i class="bi bi-x-circle text-danger"></i> Não há itens cadastrados.</span>
   </div>
@@ -118,6 +160,7 @@ export default {
   data() {
     return {
       billingsList: [],
+
       currentPage: 1,
       pageSize: 7,
       totalBillings: 0,
@@ -126,6 +169,7 @@ export default {
       billingToDeleteId: null,
       showModal: false,
       selectedBillingData: null,
+      activeFilter: null,
     };
   },
   methods: {
@@ -138,16 +182,13 @@ export default {
       this.showModal = true; // Abrir o modal
     },
 
-    // selectedPayment(billing) {
-    //   this.$emit("billing-selected", billing);
-    // },
     // Função para atualizar a lista de clientes exibidos com base na página atual
-
     updateBilling() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = Math.min(startIndex + this.pageSize, this.totalBillings);
       this.billingsList = this.billingsList.slice(startIndex, endIndex);
     },
+
     // Função para a alteração de página
     pageChange(page) {
       this.currentPage = page;
@@ -164,6 +205,24 @@ export default {
         this.updateBilling();
       } catch (error) {
         console.error("Erro ao obter cobranças:", error);
+      }
+    },
+
+    async filterByState(state) {
+      this.activeFilter = state;
+      try {
+        let res;
+        if (state) {
+          res = await axios.get(`http://localhost:3000/billings?stateBilling=${state}`);
+        } else {
+          res = await axios.get("http://localhost:3000/billings");
+        }
+        this.billingsList = res.data;
+        this.totalBillings = this.billingsList.length;
+        this.totalPages = Math.ceil(this.totalBillings / this.pageSize);
+        this.updateBilling();
+      } catch (error) {
+        console.error("Erro ao filtrar cobranças:", error);
       }
     },
   },

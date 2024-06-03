@@ -28,7 +28,31 @@
             placeholder="Pesquisar..."
             id="companyName"
             v-model="companyName"
+            @input="onInput"
+            autocomplete="off"
+            ref="companyInput"
           />
+          <div
+            class="bootstrap-autocomplete dropdown-menu show shadow"
+            v-if="suggestions.length"
+            :style="{ width: $refs.companyInput.offsetWidth + 'px' }"
+          >
+            <a
+              class="dropdown-item"
+              v-for="(suggestion, index) in suggestions"
+              :key="index"
+              @click="selectSuggestion(suggestion)"
+              style="overflow: hidden; text-overflow: ellipsis"
+            >
+              <div class="form-row small text-gray-700 p-0">
+                <div class="col-6">{{ suggestion.companyName }}</div>
+                <div class="col-6 text-right">{{ suggestion.someValue }}</div>
+              </div>
+              <div class="form-row border-bottom p-0">
+                <div class="col-12 font-weight-bolder">{{ suggestion.category }}</div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
       <div class="col-md-2">
@@ -113,6 +137,7 @@ export default {
       dueDate: "",
       stateBilling: "",
       formSubmitted: false,
+      suggestions: [],
     };
   },
   watch: {
@@ -135,6 +160,10 @@ export default {
     },
   },
   methods: {
+    onInput() {
+      this.searchCompany(this.companyName);
+    },
+
     areRequiredFieldsEmpty() {
       if (
         !this.company ||
@@ -183,19 +212,42 @@ export default {
       }
     },
 
-    async deleteBilling() {
-      try {
-        if (this.selectedBilling) {
-          await axios.delete(
-            `http://localhost:3000/companies/${this.selectedBilling.id}`
+    // async deleteBilling() {
+    //   try {
+    //     if (this.selectedBilling) {
+    //       await axios.delete(
+    //         `http://localhost:3000/companies/${this.selectedBilling.id}`
+    //       );
+    //       this.$emit("billingDeletado");
+    //       this.resetForm();
+    //       this.$emit("billing-selected", null);
+    //     }
+    //   } catch (error) {
+    //     console.error("Erro ao excluir combrança:", error);
+    //   }
+    // },
+
+    async searchCompany(name) {
+      if (name.length >= 3) {
+        console.log(name);
+        try {
+          const response = await axios.get(
+            `http://localhost:3000/companies?companyName_like=${name}`
           );
-          this.$emit("billingDeletado");
-          this.resetForm();
-          this.$emit("billing-selected", null);
+          this.suggestions = response.data;
+          console.log(response.data);
+        } catch (error) {
+          console.error("Erro ao buscar empresa:", error);
         }
-      } catch (error) {
-        console.error("Erro ao excluir combrança:", error);
+      } else {
+        this.suggestions = [];
       }
+    },
+
+    selectSuggestion(suggestion) {
+      this.company = suggestion.id || "";
+      this.companyName = suggestion.companyName || "";
+      this.suggestions = []; // Limpa as sugestões após a seleção
     },
 
     resetForm() {
@@ -211,3 +263,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bootstrap-autocomplete {
+  width: 21rem;
+  margin-top: 5px;
+}
+</style>

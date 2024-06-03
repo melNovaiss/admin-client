@@ -77,7 +77,7 @@ export default {
   name: "payment",
   props: {
     selectedBilling: Object,
-    showModal: Boolean
+    showModal: Boolean,
   },
   data() {
     return {
@@ -98,12 +98,12 @@ export default {
       this.formSubmitted = true;
 
       const data = {
-        company: this.selectedBilling.id,
+        company_id: this.selectedBilling.id,
         companyName: this.selectedBilling.companyName,
         referenceMonth: this.selectedBilling.referenceMonth,
         amount: this.selectedBilling.amount,
         dueDate: this.selectedBilling.dueDate,
-        stateBilling: this.selectedBilling.stateBilling,
+        stateBilling: "PAID",
         amountReceived: this.amountReceived,
         payDate: this.payDate,
         formOfPayment: this.formOfPayment,
@@ -113,8 +113,30 @@ export default {
         let res = await axios.post("http://localhost:3000/payment", data);
         this.$emit("close-modal");
         console.log(res);
+        // Após criar o pagamento com sucesso, atualize o estado do billing para "PAID"
+        await this.updateBillingState(this.selectedBilling.id);
       } catch (error) {
         console.error("Erro ao fazer requisição POST:", error);
+      }
+    },
+
+    async updateBillingState(billingId) {
+      try {
+        // Obter os dados atuais do objeto billing
+        const response = await axios.get(`http://localhost:3000/billings/${billingId}`);
+        const currentBillingData = response.data;
+
+        // Modificar apenas o campo stateBilling
+        currentBillingData.stateBilling = "PAID";
+
+        // Enviar os dados atualizados para o servidor
+        const res = await axios.put(
+          `http://localhost:3000/billings/${billingId}`,
+          currentBillingData
+        );
+        console.log("Estado do faturamento atualizado com sucesso:", res);
+      } catch (error) {
+        console.error("Erro ao atualizar o estado do faturamento:", error);
       }
     },
   },
