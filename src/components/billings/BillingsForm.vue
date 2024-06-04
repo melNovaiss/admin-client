@@ -143,7 +143,7 @@ export default {
   },
   watch: {
     selectedBilling: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         if (newVal) {
           // Atualiza os dados do formulário com os dados da cobrança selecionada
           this.company = newVal.id || "";
@@ -153,7 +153,7 @@ export default {
           this.dueDate = newVal.dueDate || "";
           this.stateBilling = newVal.stateBilling || "";
         } else {
-          this.resetForm(); // Reseta o formulário se não houver cobrança selecionada
+          this.resetForm();
         }
       },
       immediate: true, // Executa o handler imediatamente quando a propriedade é inicializada

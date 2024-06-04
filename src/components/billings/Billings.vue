@@ -90,13 +90,15 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-2 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
-                <div class="col-2 text-muted fs-7">R$ {{ b.amount }}</div>
-                <div class="col-3 text-muted fs-7">
+                <div class="col-4 text-muted fs-7">Mês: {{ b.referenceMonth }}</div>
+                <div class="col-4 text-muted fs-7">R$ {{ b.amount }}</div>
+                <div class="col-4 text-muted fs-7">
                   {{ b.dueDate }}
                 </div>
-                <div class="col-4 text-muted fs-7">Status: {{ b.stateBilling }}</div>
-                <!-- <div class="col-2 text-muted fs-7">
+              </div>
+              <div class="row">
+                <div class="col-6 text-muted fs-7">Status: {{ b.stateBilling }}</div>
+                <!-- <div class="col-6 text-muted fs-7">
                   {{ paymentList.formOfPayment }}
                 </div> -->
               </div>
@@ -168,7 +170,7 @@ export default {
       billingToDeleteId: null, // ID da cobrança a ser deletada
       showModal: false, // Controle de visibilidade do modal
       selectedBillingData: null, // Dados da cobrança selecionada
-      activeFilter: null, // Filtro ativo para estado da cobrança
+      activeFilter: "OPENED", // Filtro ativo para estado da cobrança
     };
   },
   methods: {
