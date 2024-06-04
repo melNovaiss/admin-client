@@ -43,19 +43,21 @@
 </template>
 
 <script>
-import { formatarCel, formatarTel } from "../assets/js/mask.js";
+import { formatarCel, formatarTel } from "../assets/js/mask.js"; // Importa as funções de formatação de celular e telefone
 
 export default {
-  name: "Contact",
+  name: "Contact", // Define o nome do componente
   props: {
-    contact: Object,
+    contact: Object, // Define a propriedade contact que é um objeto recebido do componente pai
   },
   methods: {
+    // Método para formatar o número de celular (WhatsApp)
     formatarCel() {
-      this.contact.whatsapp = formatarCel(this.contact.whatsapp);
+      this.contact.whatsapp = formatarCel(this.contact.whatsapp); // Aplica a formatação ao número de WhatsApp
     },
+    // Método para formatar o número de telefone
     formatarTel() {
-      this.contact.phone = formatarTel(this.contact.phone);
+      this.contact.phone = formatarTel(this.contact.phone); // Aplica a formatação ao número de telefone
     },
   },
 };

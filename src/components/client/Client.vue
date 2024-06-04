@@ -57,12 +57,8 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-5 text-black-50 fs-8">
-                  Tipo: {{ c.clientType }}
-                </div>
-                <div class="col-4 text-black-50 fs-8">
-                 Versão:  {{ c.bigVersion }}
-                </div>
+                <div class="col-5 text-black-50 fs-8">Tipo: {{ c.clientType }}</div>
+                <div class="col-4 text-black-50 fs-8">Versão: {{ c.bigVersion }}</div>
                 <!-- <div class="col-2 text-black-50 fs-8">
                   {{ c.active }}
                 </div>
@@ -82,57 +78,61 @@
 </template>
 
 <script>
-import Pagination from "../Pagination.vue";
-import axios from "axios";
+import Pagination from "../Pagination.vue"; // Importa o componente de paginação
+import axios from "axios"; // Importa a biblioteca axios para realizar requisições HTTP
 
 export default {
   name: "CliList",
   components: {
-    Pagination,
+    Pagination, // Declara o componente de paginação como um componente filho
   },
   data() {
     return {
-      cliList: [],
-      currentPage: 1,
-      pageSize: 7,
-      totalClients: 0,
-      client: [],
-      termoBusca: "",
-      clienteToDeleteId: null,
-      showModal: false,
+      cliList: [], // Lista de clientes
+      currentPage: 1, // Página atual da paginação
+      pageSize: 7, // Tamanho da página (quantidade de itens por página)
+      totalClients: 0, // Total de clientes
+      client: [], // Dados do cliente
+      termoBusca: "", // Termo de busca para filtrar clientes
+      clienteToDeleteId: null, // ID do cliente a ser deletado
+      showModal: false, // Controle de visibilidade do modal
     };
   },
   methods: {
+    // Emite um evento para informar o cliente selecionado
     selectClient(client) {
       this.$emit("client-selected", client);
     },
-    // Função para atualizar a lista de clientes exibidos com base na página atual
+
+    // Atualiza a lista de clientes exibidos com base na página atual
     updateCli() {
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = Math.min(startIndex + this.pageSize, this.totalClients);
-      this.cliList = this.cliList.slice(startIndex, endIndex);
-    },
-    // Função para a alteração de página
-    pageChange(page) {
-      this.currentPage = page;
-      this.updateCli();
+      const startIndex = (this.currentPage - 1) * this.pageSize; // Índice inicial da página atual
+      const endIndex = Math.min(startIndex + this.pageSize, this.totalClients); // Índice final da página atual
+      this.cliList = this.cliList.slice(startIndex, endIndex); // Atualiza a lista de clientes exibidos
     },
 
+    // Altera a página atual e atualiza a lista de clientes
+    pageChange(page) {
+      this.currentPage = page; // Atualiza a página atual
+      this.updateCli(); // Atualiza a lista de clientes exibidos
+    },
+
+    // Obtém a lista de clientes do servidor
     async getClientes() {
-      const url = "http://localhost:3000/companies";
+      const url = "http://localhost:3000/companies"; // URL da API para obter clientes
       try {
-        const res = await axios.get(url);
-        this.cliList = res.data; // Ajuste aqui
-        this.totalClients = this.cliList.length; // Ajuste aqui
-        this.totalPages = Math.ceil(this.totalClients / this.pageSize);
-        this.updateCli();
+        const res = await axios.get(url); // Faz uma requisição GET para a API
+        this.cliList = res.data; // Atualiza a lista de clientes com os dados recebidos
+        this.totalClients = this.cliList.length; // Atualiza o total de clientes
+        this.totalPages = Math.ceil(this.totalClients / this.pageSize); // Calcula o total de páginas
+        this.updateCli(); // Atualiza a lista de clientes exibidos
       } catch (error) {
-        console.error("Erro ao obter clientes:", error);
+        console.error("Erro ao obter clientes:", error); // Exibe uma mensagem de erro no console
       }
     },
   },
   mounted() {
-    this.getClientes();
+    this.getClientes(); // Chama a função para obter clientes quando o componente é montado
   },
 };
 </script>

@@ -73,11 +73,12 @@
 
 <script>
 import axios from "axios";
+
 export default {
-  name: "payment",
+  name: "payment", // Define o nome do componente
   props: {
-    selectedBilling: Object,
-    showModal: Boolean,
+    selectedBilling: Object, // Propriedade recebida do componente pai que contém os dados da cobrança selecionada
+    showModal: Boolean, // Propriedade recebida do componente pai que controla a exibição do modal
   },
   data() {
     return {
@@ -87,49 +88,53 @@ export default {
       amount: "",
       dueDate: "",
       stateBilling: "",
-      amountReceived: "",
-      payDate: "",
-      formOfPayment: "",
-      formSubmitted: false,
+      amountReceived: "", // Quantia recebida
+      payDate: "", // Data de pagamento
+      formOfPayment: "", // Forma de pagamento
+      formSubmitted: false, // Indica se o formulário foi enviado
     };
   },
   methods: {
+    // Método para criar um novo pagamento
     async createPayment() {
-      this.formSubmitted = true;
+      this.formSubmitted = true; // Indica que o formulário foi enviado
 
+      // Dados para o novo pagamento
       const data = {
         company_id: this.selectedBilling.id,
         companyName: this.selectedBilling.companyName,
         referenceMonth: this.selectedBilling.referenceMonth,
         amount: this.selectedBilling.amount,
         dueDate: this.selectedBilling.dueDate,
-        stateBilling: "PAID",
+        stateBilling: "PAID", // Define o estado da cobrança como "PAGO"
         amountReceived: this.amountReceived,
         payDate: this.payDate,
         formOfPayment: this.formOfPayment,
       };
 
       try {
+        // Envia uma requisição POST para criar o pagamento
         let res = await axios.post("http://localhost:3000/payment", data);
-        this.$emit("close-modal");
+        this.$emit("close-modal"); // Emite um evento para fechar o modal
         console.log(res);
-        // Após criar o pagamento com sucesso, atualize o estado do billing para "PAID"
+        // Após criar o pagamento com sucesso, atualiza o estado da cobrança para "PAID"
         await this.updateBillingState(this.selectedBilling.id);
       } catch (error) {
         console.error("Erro ao fazer requisição POST:", error);
       }
     },
 
+    // Método para atualizar o estado da cobrança
     async updateBillingState(billingId) {
       try {
-        // Obter os dados atuais do objeto billing
+        // Obtém os dados atuais da cobrança
         const response = await axios.get(`http://localhost:3000/billings/${billingId}`);
         const currentBillingData = response.data;
 
-        // Modificar apenas o campo stateBilling
+        // Modifica apenas o campo stateBilling
         currentBillingData.stateBilling = "PAID";
 
-        // Enviar os dados atualizados para o servidor
+        // Envia os dados atualizados para o servidor
         const res = await axios.put(
           `http://localhost:3000/billings/${billingId}`,
           currentBillingData

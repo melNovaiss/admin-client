@@ -30,39 +30,44 @@
 
 <script>
 export default {
-  name: "Pagination",
+  name: "Pagination", // Define o nome do componente
   props: {
     currentPage: {
       type: Number,
-      required: true,
+      required: true, // Define a propriedade currentPage que é um número e é obrigatória
     },
     totalPages: {
       type: Number,
-      required: true,
+      required: true, // Define a propriedade totalPages que é um número e é obrigatória
     },
   },
   computed: {
+    // Computed property para obter as páginas visíveis na paginação
     getVisiblePages() {
-      const visiblePages = [];
-      const startPage = Math.max(1, this.currentPage - 1);
-      const endPage = Math.min(this.totalPages, this.currentPage + 1);
+      const visiblePages = []; // Array para armazenar as páginas visíveis
+      const startPage = Math.max(1, this.currentPage - 1); // Calcula a página inicial, garantindo que seja pelo menos 1
+      const endPage = Math.min(this.totalPages, this.currentPage + 1); // Calcula a página final, garantindo que não exceda totalPages
       for (let i = startPage; i <= endPage; i++) {
-        visiblePages.push(i);
+        visiblePages.push(i); // Adiciona as páginas visíveis ao array
       }
-      return visiblePages;
+      return visiblePages; // Retorna o array de páginas visíveis
     },
   },
   methods: {
+    // Método para navegar para uma página específica
     goPage(page) {
       if (page >= 1 && page <= this.totalPages) {
-        this.$emit("page-changed", page);
+        // Verifica se a página está dentro do intervalo válido
+        this.$emit("page-changed", page); // Emite o evento "page-changed" com o número da página
       }
     },
+    // Método para navegar para a primeira página
     firstPage() {
-      this.goPage(1);
+      this.goPage(1); // Chama goPage com o número da primeira página
     },
+    // Método para navegar para a última página
     lastPage() {
-      this.goPage(this.totalPages);
+      this.goPage(this.totalPages); // Chama goPage com o número da última página
     },
   },
 };

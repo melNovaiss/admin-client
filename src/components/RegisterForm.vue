@@ -54,43 +54,48 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"; // Importa a biblioteca axios para realizar requisições HTTP
 
 export default {
-  name: "registerForm",
+  name: "registerForm", // Define o nome do componente
   data() {
     return {
-      username: "",
-      password: "",
-      role: "",
-      formSubmitted: false,
+      username: "", // Armazena o nome de usuário
+      password: "", // Armazena a senha
+      role: "", // Armazena o papel do usuário
+      formSubmitted: false, // Indica se o formulário foi enviado
     };
   },
   methods: {
+    // Método para criar um novo usuário
     async createUser() {
-      this.formSubmitted = true;
+      this.formSubmitted = true; // Marca que o formulário foi enviado
 
+      // Verifica se os campos de usuário, senha ou papel estão vazios
       if (this.username === "" || this.password === "" || this.role === "") {
-        return;
+        return; // Se estiverem vazios, retorna sem fazer nada
       }
 
+      // Prepara os dados para envio
       const data = {
         username: this.username,
         password: this.password,
         role: this.role,
       };
 
+      // Realiza a requisição de registro de usuário
       await axios
-        .post("http://localhost:3000/register", data)
+        .post("http://localhost:3000/register", data) // Faz a requisição POST para a URL especificada
         .then((res) => {
-          this.username = "";
-          this.password = "";
-          this.role = "";
-          this.$router.push("/login");
-          console.log(res);
+          // Se a requisição for bem-sucedida
+          this.username = ""; // Limpa o campo de usuário
+          this.password = ""; // Limpa o campo de senha
+          this.role = ""; // Limpa o campo de papel
+          this.$router.push("/login"); // Redireciona para a página de login
+          console.log(res); // Exibe a resposta no console
         })
         .catch((err) => {
-          console.log(err.response);
+          console.log(err.response); // Se houver um erro, exibe-o no console
         });
     },
   },

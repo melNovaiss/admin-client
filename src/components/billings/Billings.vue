@@ -159,42 +159,44 @@ export default {
   },
   data() {
     return {
-      billingsList: [],
-
-      currentPage: 1,
-      pageSize: 7,
-      totalBillings: 0,
-      billing: [],
-      termoBusca: "",
-      billingToDeleteId: null,
-      showModal: false,
-      selectedBillingData: null,
-      activeFilter: null,
+      billingsList: [], // Lista de cobranças
+      currentPage: 1, // Página atual da paginação
+      pageSize: 7, // Tamanho da página (quantidade de itens por página)
+      totalBillings: 0, // Total de cobranças
+      billing: [], // Dados da cobrança
+      termoBusca: "", // Termo de busca para filtrar cobranças
+      billingToDeleteId: null, // ID da cobrança a ser deletada
+      showModal: false, // Controle de visibilidade do modal
+      selectedBillingData: null, // Dados da cobrança selecionada
+      activeFilter: null, // Filtro ativo para estado da cobrança
     };
   },
   methods: {
+    // Emite um evento para informar a cobrança selecionada
     selectedBilling(billing) {
       this.$emit("billing-selected", billing);
     },
 
+    // Define os dados da cobrança selecionada e abre o modal
     selectedPayment(billing) {
       this.selectedBillingData = billing; // Definir os dados da cobrança clicada
-      this.showModal = true; // Abrir o modal
+      this.showModal = true;
     },
 
-    // Função para atualizar a lista de clientes exibidos com base na página atual
+    // Atualiza a lista de cobranças exibidas com base na página atual
     updateBilling() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = Math.min(startIndex + this.pageSize, this.totalBillings);
       this.billingsList = this.billingsList.slice(startIndex, endIndex);
     },
 
-    // Função para a alteração de página
+    // Altera a página atual e atualiza a lista de cobranças
     pageChange(page) {
       this.currentPage = page;
       this.updateBilling();
     },
 
+    // Obtém a lista de cobranças do servidor
     async getBillings() {
       const url = "http://localhost:3000/billings";
       try {
@@ -208,6 +210,7 @@ export default {
       }
     },
 
+    // Filtra as cobranças com base no estado fornecido
     async filterByState(state) {
       this.activeFilter = state;
       try {
@@ -227,7 +230,7 @@ export default {
     },
   },
   mounted() {
-    this.getBillings();
+    this.getBillings(); // Chama a função para obter cobranças quando o componente é montado
   },
 };
 </script>

@@ -249,23 +249,23 @@
 </template>
 
 <script>
-import axios from "axios";
-import { formatarCpfCnpj } from "../../assets/js/mask";
-import Address from "@/components/Address.vue";
-import Contact from "@/components/Contact.vue";
+import axios from "axios"; // Importa a biblioteca axios para realizar requisições HTTP
+import { formatarCpfCnpj } from "../../assets/js/mask"; // Importa a função para formatar CPF/CNPJ
+import Address from "@/components/Address.vue"; // Importa o componente de endereço
+import Contact from "@/components/Contact.vue"; // Importa o componente de contato
 
 export default {
   name: "CliForm",
   components: {
-    Address,
-    Contact,
+    Address, // Declara o componente de endereço como um componente filho
+    Contact, // Declara o componente de contato como um componente filho
   },
   props: {
-    selectedClient: Object,
+    selectedClient: Object, // Propriedade recebida do componente pai
   },
   data() {
     return {
-      // isClientSelected: false, // Variável para controlar a visibilidade do botão de exclusão
+      // Inicializa os dados do formulário
       cpfCnpj: "",
       companyName: "",
       tradeName: "",
@@ -343,6 +343,7 @@ export default {
     },
   },
   methods: {
+    // Verifica se os campos obrigatórios estão vazios
     areRequiredFieldsEmpty() {
       if (
         !this.cpfCnpj ||
@@ -371,10 +372,12 @@ export default {
       return false;
     },
 
+    // Formata o CPF/CNPJ
     formatarCpfCnpj() {
       this.cpfCnpj = formatarCpfCnpj(this.cpfCnpj);
     },
 
+    // Cria ou atualiza um cliente
     async createCli() {
       this.formSubmitted = true;
 
@@ -409,43 +412,47 @@ export default {
       try {
         let res;
         if (this.selectedClient) {
+          // Atualiza o cliente existente
           res = await axios.put(
             `http://localhost:3000/companies/${this.selectedClient.id}`,
             data
           );
         } else {
+          // Cria um novo cliente
           res = await axios.post("http://localhost:3000/companies", data);
           console.log("data");
         }
 
-        this.$emit("clienteCriado");
-        this.resetForm();
-        // this.$router.push("/client");
-        this.$emit("client-selected", null);
+        this.$emit("clienteCriado"); // Emite um evento para informar que o cliente foi criado
+        this.resetForm(); // Reseta o formulário
+        this.$emit("client-selected", null); // Emite um evento para resetar a seleção de cliente
 
+        // Alterna para a aba de detalhes
         const detalhesTabButton = document.getElementById("pills-detalhes-tab");
         detalhesTabButton.click();
         console.log(res);
       } catch (error) {
-        console.log(error.response);
+        console.log(error.response); // Exibe uma mensagem de erro no console
       }
     },
 
+    // Deleta o cliente selecionado
     async deleteClient() {
       try {
         if (this.selectedClient) {
           await axios.delete(`http://localhost:3000/companies/${this.selectedClient.id}`);
-          this.$emit("clienteDeletado");
-          this.resetForm();
-          this.$emit("client-selected", null);
+          this.$emit("clienteDeletado"); // Emite um evento para informar que o cliente foi deletado
+          this.resetForm(); // Reseta o formulário
+          this.$emit("client-selected", null); // Emite um evento para resetar a seleção de cliente
         }
       } catch (error) {
-        console.error("Erro ao excluir cliente:", error);
+        console.error("Erro ao excluir cliente:", error); // Exibe uma mensagem de erro no console
       }
     },
 
+    // Reseta o formulário para o estado inicial
     resetForm() {
-      this.$emit("client-selected", null);
+      this.$emit("client-selected", null); // Emite um evento para resetar a seleção de cliente
       this.id = "";
       this.cpfCnpj = "";
       this.companyName = "";
